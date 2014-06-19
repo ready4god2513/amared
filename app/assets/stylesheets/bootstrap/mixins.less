@@ -895,6 +895,15 @@
 // Example usage: change the default blue border and shadow to white for better
 // contrast against a dark gray background.
 
+.blur(@distance)
+{
+  -webkit-filter: blur(@distance); 
+  -moz-filter: blur(@distance); 
+  -o-filter: blur(@distance); 
+  -ms-filter: blur(@distance); 
+  filter: blur(@distance);
+}
+
 .form-control-focus(@color: @input-border-focus) {
   @color-rgba: rgba(red(@color), green(@color), blue(@color), .6);
   &:focus {

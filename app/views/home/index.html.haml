@@ -2,14 +2,13 @@
 #posts.row
   - @output.each do |item|
     .col-xs-12.col-md-4.col-lg-3.item
-      .well
-        %h4= link_to item.title, item.permalink, target: "_blank"
+      %div{class: "well #{'nsfw' if item.over_18}"}
+        %h4= link_to "#{item.title} #{'(nsfw)' if item.over_18}", item.url, target: "_blank"
         - if item.media.present?
           = link_to image_tag(item.media[:oembed][:thumbnail_url]), item.url, target: "_blank"
           %p.label.label-default= link_to "View Album", item.url, target: "_blank"
         - elsif item.url =~ /\.png|\.jpg|\.jpeg|\.gif/i
           = link_to image_tag(item.url), item.url, target: "_blank"
-          
         %hr
         %h5
           %span.text-danger
@@ -18,9 +17,11 @@
           \&nbsp;
           %span.text-muted
             %span.glyphicon.glyphicon-comment
-            = item.num_comments
+            = link_to item.num_comments, item.permalink
           %a.pull-right{:href => "http://reddit.com/u/#{item.author}", :target => "_blank"}
             %span.text-muted /u/#{item.author}
+            %br
+            %small= Time.at(item.attributes[:created_utc]).to_datetime.to_formatted_s(:long)
 
         %script
           console.log(#{item.to_json.html_safe})
