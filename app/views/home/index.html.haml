@@ -1,0 +1,26 @@
+%h1.text-center.page-header /r/#{@sub.name}
+#posts.row
+  - @output.each do |item|
+    .col-xs-12.col-md-4.col-lg-3.item
+      .well
+        %h4= link_to item.title, item.permalink, target: "_blank"
+        - if item.media.present?
+          = link_to image_tag(item.media[:oembed][:thumbnail_url]), item.url, target: "_blank"
+          %p.label.label-default= link_to "View Album", item.url, target: "_blank"
+        - elsif item.url =~ /\.png|\.jpg|\.jpeg|\.gif/i
+          = link_to image_tag(item.url), item.url, target: "_blank"
+          
+        %hr
+        %h5
+          %span.text-danger
+            %span.glyphicon.glyphicon-heart
+            = item.score
+          \&nbsp;
+          %span.text-muted
+            %span.glyphicon.glyphicon-comment
+            = item.num_comments
+          %a.pull-right{:href => "http://reddit.com/u/#{item.author}", :target => "_blank"}
+            %span.text-muted /u/#{item.author}
+
+        %script
+          console.log(#{item.to_json.html_safe})

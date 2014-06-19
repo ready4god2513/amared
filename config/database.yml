@@ -1,0 +1,26 @@
+# Add your username and password to your `.bash_profile` or equivalent.
+# Example
+#  export DB_USER_POSTGRES_USERNAME=andrew
+#  export DB_USER_POSTGRES_PASSWORD=andrew
+#
+# Note:  This will use (or create) a new database for each branch in the project.
+#        Just run `rake db:rebuild` after creating or switching to a new branch.
+#        After that you won't need to rebuild the db when switching branches!  :)
+
+development:
+  adapter: postgresql
+  encoding: utf8
+  database: <%= "#{Rails.application.class.parent_name}-dev-#{`git rev-parse --abbrev-ref HEAD`.strip}".downcase %>
+  username: <%= ENV['DB_USER_POSTGRES_USERNAME'] %>
+  password: <%= ENV['DB_USER_POSTGRES_PASSWORD'] %>
+  host: localhost
+  port: 5432
+ 
+test:
+  adapter: postgresql
+  encoding: utf8
+  database: <%= "#{Rails.application.class.parent_name}-test-#{`git rev-parse --abbrev-ref HEAD`.strip}".downcase %>
+  username: <%= ENV['DB_USER_POSTGRES_USERNAME'] %>
+  password: <%= ENV['DB_USER_POSTGRES_PASSWORD'] %>
+  host: localhost
+  port: 5432
