@@ -1,7 +1,14 @@
-%h1.text-center.page-header /r/#{@sub.name}
+.well.text-center
+  - @subs.each do |sub|
+    %span.label.label-info= link_to sub.name.titleize, subreddit_path(subreddit: sub.name)
+
+.page-header.text-center
+  %h1 /r/#{@sub.name}
+  %h3 #{pluralize(@sub.attributes[:subscribers], "subscriber")}
+
 #posts.row
   - @output.each do |item|
-    .col-xs-12.col-md-4.col-lg-3.item
+    .col-xs-12.col-md-4.item
       %div{class: "well #{'nsfw' if item.over_18}"}
         %h4= link_to "#{item.title} #{'(nsfw)' if item.over_18}", item.url, target: "_blank"
         - if item.media.present?
@@ -22,6 +29,3 @@
             %span.text-muted /u/#{item.author}
             %br
             %small= Time.at(item.attributes[:created_utc]).to_datetime.to_formatted_s(:long)
-
-        %script
-          console.log(#{item.to_json.html_safe})

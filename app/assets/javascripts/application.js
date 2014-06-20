@@ -12,17 +12,4 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require turbolinks
 //= require_tree .
-
-$(function(){
-
-  var container = document.querySelector('#posts');
-
-  imagesLoaded(container, function(){
-    new Masonry(container, {
-      itemSelector: '.item'
-    });
-  });
-  
-});
