@@ -4,6 +4,15 @@
 
 .page-header.text-center
   %h1 /r/#{@sub.name}
+  %p.sorting-options
+    %small
+      - %w{top hot new}.each do |category|
+        = link_to category, subreddit_path(subreddit: @sub.name, category: category), class: "#{'active' if params[:category] == category}"
+    - if params[:category].present? && params[:category] == "top"
+      %small
+        |
+        - %w{hour day week month year all}.each do |time|
+          = link_to time, subreddit_path(subreddit: @sub.name, category: "top", time: time), class: "#{'active' if params[:time] == time}"
   %h3 #{pluralize(@sub.attributes[:subscribers], "subscriber")}
 
 #posts.row
@@ -17,15 +26,18 @@
         - elsif item.url =~ /\.png|\.jpg|\.jpeg|\.gif/i
           = link_to image_tag(item.url), item.url, target: "_blank"
         %hr
-        %h5
-          %span.text-danger
-            %span.glyphicon.glyphicon-heart
-            = item.score
-          \&nbsp;
-          %span.text-muted
-            %span.glyphicon.glyphicon-comment
-            = link_to item.num_comments, item.permalink
-          %a.pull-right{:href => "http://reddit.com/u/#{item.author}", :target => "_blank"}
-            %span.text-muted /u/#{item.author}
-            %br
-            %small= Time.at(item.attributes[:created_utc]).to_datetime.to_formatted_s(:long)
+        %h5.row
+          .col-xs-12
+            %span.text-danger
+              %span.glyphicon.glyphicon-heart
+              = item.score
+            \&nbsp;
+            %span.text-muted
+              %span.glyphicon.glyphicon-comment
+              = link_to item.num_comments, item.permalink
+            %a.text-right.pull-right{:href => "http://reddit.com/u/#{item.author}", :target => "_blank"}
+              %span.text-muted /u/#{item.author.strip}
+              %br
+              %small #{time_ago_in_words(Time.at(item.attributes[:created_utc]).to_datetime)} ago
+
+.row= link_to "Next Page", next_page_link(@sub.options), class: "btn btn-info col-xs-12"
