@@ -34,8 +34,8 @@
             \&nbsp;
             %span.text-muted
               %span.glyphicon.glyphicon-comment
-              = link_to item.num_comments, item.permalink
-            %a.text-right.pull-right{:href => "http://reddit.com/u/#{item.author}", :target => "_blank"}
+              = link_to item.num_comments, item.permalink, target: "_blank"
+            %a.text-right.pull-right{:href => "http://reddit.com/u/#{item.author}", target: "_blank"}
               %span.text-muted /u/#{item.author.strip}
               %br
               %small #{time_ago_in_words(Time.at(item.attributes[:created_utc]).to_datetime)} ago
