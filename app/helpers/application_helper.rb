@@ -12,7 +12,7 @@ module ApplicationHelper
 
   def subs
     Rails.cache.fetch(:front_page_subs) do
-      RedditKit.subreddits(limit: 10).sort_by { |r| r.name }.map { |s| Subreddit.new(s) }
+      RedditKit.subreddits(limit: 20).sort_by { |r| r.name }.map { |s| Subreddit.new(s) }
     end
   end
 
