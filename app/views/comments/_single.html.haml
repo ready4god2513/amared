@@ -1,6 +1,6 @@
 - unless comment.blank?
   %div{class: "col-xs-12"} 
-    .well{style: "margin-left:#{30 * layer}px", class: "comments-layer layer-#{layer}"}
+    .well{class: "comments-layer layer-#{layer}"}
       = markdownify(comment.body).html_safe
       %h5
         %span.text-danger
@@ -16,6 +16,3 @@
       - next if reply.kind == "more"
       .row
         = render "single", comment: reply, layer: layer + 1
-    
-    %script
-      console.log(#{comment.attributes.to_json.html_safe})

@@ -17,7 +17,7 @@
       \&nbsp;
       %span.text-muted
         %span.glyphicon.glyphicon-comment
-        = link_to item.num_comments, comments_url(subreddit: @sub.name, id: item.id)
+        = link_to item.num_comments, comments_url(subreddit: @sub.name, id: item.id, anchor: :comments)
       %a.text-right.pull-right{:href => "http://reddit.com/u/#{item.author}", target: "_blank"}
         %span.text-muted /u/#{item.author.try(:strip)}
         %br
