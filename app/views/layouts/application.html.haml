@@ -7,8 +7,10 @@
     = csrf_meta_tags
   %body{class: "#{'hide-nsfw' unless session[:show_nsfw]}"}
     .container-fluid
-      .text-center
-        - subs.each do |sub|
-          %span.label.label-default= link_to sub.name.titleize, subreddit_path(subreddit: sub.name)
+      %details
+        %summary.text-center Filter Subreddits
+        .text-center
+          - subs.each do |sub|
+            %span.label.label-default= link_to sub.name.titleize, subreddit_path(subreddit: sub.name)
     .container
       = yield
