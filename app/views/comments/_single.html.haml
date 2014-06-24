@@ -1,0 +1,21 @@
+- unless comment.blank?
+  %div{class: "col-xs-12"} 
+    .well{style: "margin-left:#{30 * layer}px", class: "comments-layer layer-#{layer}"}
+      = markdownify(comment.body).html_safe
+      %h5
+        %span.text-danger
+          %span.glyphicon.glyphicon-heart
+          = comment.score
+        \&nbsp;
+        %a.text-right.pull-right{:href => "http://reddit.com/u/#{comment.author}", target: "_blank"}
+          %span.text-muted /u/#{comment.author.try(:strip)}
+          %br
+          %small #{time_ago_in_words(Time.at(comment.attributes[:created_utc]).to_datetime)} ago
+
+    - comment.replies.each do |reply|
+      - next if reply.kind == "more"
+      .row
+        = render "single", comment: reply, layer: layer + 1
+    
+    %script
+      console.log(#{comment.attributes.to_json.html_safe})

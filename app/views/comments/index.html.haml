@@ -1,0 +1,14 @@
+= render "r/header", sub: @sub
+= render "r/item", item: @item, tlength: 50000
+
+- title(@item.title)
+%hr
+%h4#comments Comments
+%p.sorting-options
+  %strong Sort By
+  %small
+    - %w{confidence top new hot controversial old random}.each do |sort|
+      %span.label.label-warning= link_to sort, params.merge({sort: sort, anchor: "comments"}), class: "#{'active' if params[:sort] == sort}"
+.row
+  - @comments.each do |comment|
+    = render "single", comment: comment, layer: 0

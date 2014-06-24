@@ -1,0 +1,9 @@
+= render "header", sub: @sub
+- title(@sub.name)
+
+#posts.row
+  - @output.each do |item|
+    .col-xs-12.col-md-4.item
+      = render "item", item: item, tlength: 200
+
+.row= link_to "Next Page", next_page_link(@sub.options), class: "btn btn-info col-xs-12"

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
 
 
-  get "r/:subreddit(/:category(/:time))", to: "home#index", as: "subreddit"
+  get 'search', to: "search#index", as: :search
+  get 'r/:subreddit/item/:id/comments', to: "comments#index", as: :comments
+  
+  get "r/:subreddit(/:category(/:time))", to: "r#show", as: "subreddit"
   root "home#index"
   
 end

@@ -13,7 +13,7 @@ class Subreddit
   def links(options = {})
     @options = options
     @links ||= RedditKit.links(@sub, options.dup)
-    options.merge!({ after: @links.after })
+    options.merge!({ after: @links.after, subreddit: @sub.name })
     @links.map { |l| Link.new(l) }
   end
 

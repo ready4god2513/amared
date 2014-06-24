@@ -1,0 +1,12 @@
+.page-header.text-center
+  %h1= link_to "/r/#{sub.name}", subreddit_path(subreddit: sub.name)
+  %p.sorting-options
+    %small
+      - %w{top/day hot new controversial/day rising}.each do |category|
+        %span.label.label-default= link_to category.split("/").first, subreddit_path(subreddit: sub.name, category: category), class: "#{'active' if params[:category] == category}"
+    - if params[:category].present? && ["top", "controversial"].include?(params[:category])
+      %small
+        |
+        - %w{hour day week month year all}.each do |time|
+          %span.label.label-warning= link_to time, params.merge({time: time}), class: "#{'active' if params[:time] == time}"
+  %h3 #{pluralize(sub.attributes[:subscribers], "subscriber")}

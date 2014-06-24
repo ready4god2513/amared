@@ -1,0 +1,24 @@
+%article{class: "well #{'nsfw' if item.over_18}"}
+  %h4= link_to "#{item.title} #{'(nsfw)' if item.over_18}", item.url
+  - if item.media.present?
+    = link_to image_tag(item.media[:oembed][:thumbnail_url]), item.url, target: "_blank"
+    %p.label.label-default= link_to "View Album", item.url, target: "_blank"
+  - elsif item.url =~ /\.png|\.jpg|\.jpeg|\.gif/i
+    = link_to image_tag(item.url), item.url, target: "_blank"
+  %p
+    %small= link_to domain_name(item.url), search_url(site: domain_name(item.url))
+  %p= truncate(item.selftext, length: tlength)
+  %hr
+  %h5.row
+    .col-xs-12
+      %span.text-danger
+        %span.glyphicon.glyphicon-heart
+        = item.score
+      \&nbsp;
+      %span.text-muted
+        %span.glyphicon.glyphicon-comment
+        = link_to item.num_comments, comments_url(subreddit: @sub.name, id: item.id)
+      %a.text-right.pull-right{:href => "http://reddit.com/u/#{item.author}", target: "_blank"}
+        %span.text-muted /u/#{item.author.try(:strip)}
+        %br
+        %small #{time_ago_in_words(Time.at(item.attributes[:created_utc]).to_datetime)} ago
