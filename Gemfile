@@ -9,8 +9,6 @@ gem 'pg'
 
 gem 'haml-rails'
 
-gem 'redcarpet'
-
 # Use SCSS for stylesheets
 gem 'less-rails'
 # Use Uglifier as compressor for JavaScript assets
