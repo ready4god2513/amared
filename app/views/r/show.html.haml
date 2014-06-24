@@ -7,3 +7,7 @@
       = render "item", item: item, tlength: 200
 
 .row= link_to "Next Page", next_page_link(@sub.options), class: "btn btn-info col-xs-12"
+
+.page-header
+  .text-center
+    = render "shared/related", sub: @sub

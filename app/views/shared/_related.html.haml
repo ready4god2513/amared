@@ -1,0 +1,4 @@
+%h4 You may also be interested in:
+%p
+  - related_subs(sub).each do |related|
+    %span.btn.btn-large.btn-danger= link_to related.titleize, subreddit_path(subreddit: related)

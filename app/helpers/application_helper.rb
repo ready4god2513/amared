@@ -27,4 +27,8 @@ module ApplicationHelper
     @markdown.render(str)
   end
 
+  def related_subs(sub)
+    @related ||= RedditKit.subreddits_by_topic(sub.name).sort_by {|r| r.titleize }
+  end
+
 end
