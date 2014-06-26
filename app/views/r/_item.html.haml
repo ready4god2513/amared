@@ -7,7 +7,10 @@
     = link_to image_tag(item.url), item.url, target: "_blank"
   %p
     %small= link_to domain_name(item.url), search_url(site: domain_name(item.url))
-  %p= truncate(item.selftext, length: tlength)
+  - if !tlength
+    = markdownify(item.selftext).html_safe
+  - else
+    %p= truncate(item.selftext, length: tlength)
   %hr
   %h5.row
     .col-xs-12
