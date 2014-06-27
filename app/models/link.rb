@@ -1,6 +1,7 @@
 class Link
 
   @@decoder = HTMLEntities.new
+  attr_accessor :link
 
   def initialize(l)
     @link = l
