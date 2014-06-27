@@ -8,9 +8,34 @@
   %body{class: "#{'hide-nsfw' unless session[:show_nsfw]}"}
     .container-fluid
       %details
-        %summary.text-center Filter Subreddits
-        .text-center
-          - subs.each do |sub|
-            %span.label.label-default= link_to sub.name.titleize, subreddit_path(subreddit: sub.name)
+        %summary.text-center Search &amp; Filter
+        .text-center.well
+          .row
+            .col-sm-12
+              - subs.each do |sub|
+                %span.label.label-default= link_to sub.name.titleize, subreddit_path(subreddit: sub.name)
+
+          %br
+          .row
+            .col-sm-4
+              = form_tag :search, method: "GET", class: "form-inline" do
+                = text_field_tag :s, nil, placeholder: "Search", class: "form-control"
+                = hidden_field_tag :sort, :top
+                = hidden_field_tag :time, :all
+                = submit_tag "Search", class: "btn btn-info"
+
+            .col-sm-4
+              = form_tag :search_subs, method: "GET",  class: "form-inline" do
+                = text_field_tag :s, nil, placeholder: "Find a Subreddit",  class: "form-control"
+                = hidden_field_tag :sort, :top
+                = hidden_field_tag :time, :all
+                = submit_tag "Find a Sub", class: "btn btn-info"
+
+            .col-sm-4
+              = form_tag :search_domain, method: "GET",  class: "form-inline" do
+                = text_field_tag :d, nil, placeholder: "Find Links from Domain",  class: "form-control"
+                = hidden_field_tag :sort, :top
+                = hidden_field_tag :time, :all
+                = submit_tag "Search Domain", class: "btn btn-info"
     .container
       = yield

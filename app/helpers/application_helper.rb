@@ -3,7 +3,7 @@ require "addressable/uri"
 module ApplicationHelper
 
   def next_page_link(options)
-    subreddit_path(options)
+    url_for(options)
   end
 
   def domain_name(str)

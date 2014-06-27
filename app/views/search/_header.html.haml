@@ -1,0 +1,11 @@
+.page-header.text-center
+  %h1= @query
+  %p.sorting-options
+    %small
+      - %w{top hot new controversial rising}.each do |category|
+        %span.label.label-default= link_to category.split("/").first, params.merge({sort: category, after: nil, time: nil}), class: "#{'active' if params[:category] == category}"
+    - if params[:sort].present? && ["top", "controversial"].include?(params[:sort])
+      %small
+        |
+        - %w{hour day week month year all}.each do |time|
+          %span.label.label-warning= link_to time, params.merge({time: time, after: nil}), class: "#{'active' if params[:time] == time}"

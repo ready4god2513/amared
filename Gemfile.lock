@@ -1,3 +1,13 @@
+GIT
+  remote: git://github.com/ready4god2513/RedditKit.rb.git
+  revision: bd28dc7ab2aa540f541d3286f0147f8aa2ce365c
+  branch: dev
+  specs:
+    redditkit (1.0.5)
+      faraday (~> 0.8)
+      htmlentities (~> 4.3)
+      multi_json (~> 1.8)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -107,10 +117,6 @@ GEM
     rdoc (4.1.1)
       json (~> 1.4)
     redcarpet (3.1.2)
-    redditkit (1.0.1)
-      faraday (~> 0.8)
-      htmlentities (~> 4.3)
-      multi_json (~> 1.8)
     ref (1.0.5)
     sdoc (0.4.0)
       json (~> 1.8)
@@ -154,6 +160,7 @@ DEPENDENCIES
   addressable
   coffee-rails (~> 4.0.0)
   haml-rails
+  htmlentities
   jbuilder (~> 2.0)
   jquery-rails
   less-rails
@@ -161,7 +168,7 @@ DEPENDENCIES
   rails (= 4.1.1)
   rails_12factor
   redcarpet
-  redditkit (~> 1.0.1)
+  redditkit!
   sdoc (~> 0.4.0)
   spring
   therubyracer

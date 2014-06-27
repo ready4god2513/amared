@@ -1,9 +1,12 @@
 %article{class: "well #{'nsfw' if item.over_18}"}
   %h4= link_to "#{item.title} #{'(nsfw)' if item.over_18}", item.url
-  - if item.media.present?
-    = link_to image_tag(item.media[:oembed][:thumbnail_url]), item.url, target: "_blank"
+  - if item.video?
+    .media
+      = link_to image_tag(item.thumbnail), item.url, class: "render-video", "data-video" => item.video_embed
+  - elsif item.media.present?
+    = link_to image_tag(item.thumbnail), item.url, target: "_blank"
     %p.label.label-default= link_to "View Album", item.url, target: "_blank"
-  - elsif item.url =~ /\.png|\.jpg|\.jpeg|\.gif/i
+  - elsif item.picture?
     = link_to image_tag(item.url), item.url, target: "_blank"
   %p
     %small= link_to domain_name(item.url), search_url(site: domain_name(item.url))
@@ -20,7 +23,7 @@
       \&nbsp;
       %span.text-muted
         %span.glyphicon.glyphicon-comment
-        = link_to item.num_comments, comments_url(subreddit: @sub.name, id: item.id, anchor: :comments)
+        = link_to item.num_comments, comments_url(subreddit: item.subreddit, id: item.id, anchor: :comments)
       %a.text-right.pull-right{:href => "http://reddit.com/u/#{item.author}", target: "_blank"}
         %span.text-muted /u/#{item.author.try(:strip)}
         %br

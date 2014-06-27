@@ -1,0 +1,13 @@
+= render "header"
+- title(params[:s])
+
+#posts.row
+  - @output.each do |item|
+    .col-xs-12.col-md-4.item
+      .well
+        - if item.is_a?(OpenStruct)
+          %h4= link_to item.name.titleize, subreddit_path(subreddit: item.name)
+        - else
+          %h4= link_to item.title.titleize, subreddit_path(subreddit: item.display_name)
+          %p #{item.subscribers} Subscribers
+          .hidden= markdownify(item.description).html_safe

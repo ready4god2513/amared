@@ -1,5 +1,7 @@
 class Link
 
+  @@decoder = HTMLEntities.new
+
   def initialize(l)
     @link = l
   end
@@ -10,6 +12,24 @@ class Link
 
   def method_missing(method, *args, &block)
     @link.send(method, *args, &block)
+  end
+
+  def video?
+    @link.media[:oembed][:type] == "video"
+    rescue
+      false
+  end
+
+  def picture?
+    @link.url =~ /\.png|\.jpg|\.jpeg|\.gif/i
+  end
+
+  def thumbnail
+    @link.media[:oembed][:thumbnail_url]
+  end
+
+  def video_embed
+    @@decoder.decode(@link.media[:oembed][:html])
   end
 
 end

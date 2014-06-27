@@ -31,8 +31,9 @@ gem 'spring',        group: :development
 gem 'addressable'
 
 gem 'vacuum'
-gem 'redditkit', '~> 1.0.1'
+gem 'redditkit', github: "ready4god2513/RedditKit.rb", branch: "dev"
 gem 'redcarpet'
+gem 'htmlentities'
 
 gem 'rails_12factor', group: :production
 
