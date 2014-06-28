@@ -1,5 +1,5 @@
 %article{class: "well #{'nsfw' if item.over_18}"}
-  %h4= link_to "#{item.title} #{'(nsfw)' if item.over_18}", item.url
+  %h4= link_to "#{item.title} #{'(nsfw)' if item.over_18}", item.self_post? ? comments_url(subreddit: item.subreddit, id: item.id, anchor: :comments) : item.url
   - if item.video?
     .media
       = link_to image_tag(item.thumbnail), item.url, class: "render-video", "data-video" => item.video_embed

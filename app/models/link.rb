@@ -27,6 +27,8 @@ class Link
 
   def thumbnail
     @link.media[:oembed][:thumbnail_url]
+    rescue
+      nil
   end
 
   def video_embed
