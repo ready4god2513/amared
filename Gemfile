@@ -35,6 +35,7 @@ gem 'redditkit', github: "ready4god2513/RedditKit.rb", branch: "dev"
 # gem 'redditkit', path: '/Users/brandon/Documents/workspace/ruby/RedditKit.rb'
 gem 'redcarpet'
 gem 'htmlentities'
+gem 'figaro'
 
 gem 'rails_12factor', group: :production
 

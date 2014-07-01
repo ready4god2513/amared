@@ -2,7 +2,7 @@ class RController < ApplicationController
 
   def show
     if params[:subreddit] == "all"
-      RedditKit.sign_in 'morethanaprogrammer', 'losgatos'
+      RedditKit.sign_in ENV["REDDIT_USERNAME"], ENV["REDDIT_PASSWORD"]
       @links = RedditKit.links("all", params.dup)
       @output = @links.map { |l| Link.new(l) }
     else
