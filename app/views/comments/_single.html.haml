@@ -5,7 +5,7 @@
       %h5
         %span.text-danger
           %span.glyphicon.glyphicon-heart
-          = link_to comment.score, comments_url(subreddit: comment.subreddit, id: comment.link_id.gsub(/t3_/, ''), anchor: :comments)
+          = link_to comment.score, comments_url(subreddit: comment.subreddit, id: comment.link_id.gsub(/t3_/, ''), anchor: :comments), title: comment.attributes[:link_title]
         \&nbsp;
         %span.pull-right.text-right
           %a.text-right{:href => "http://reddit.com/u/#{comment.author}", target: "_blank"}

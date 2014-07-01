@@ -24,7 +24,10 @@
       %span.text-muted
         %span.glyphicon.glyphicon-comment
         = link_to item.num_comments, comments_url(subreddit: item.subreddit, id: item.id, anchor: :comments)
-      %a.text-right.pull-right{:href => "http://reddit.com/u/#{item.author}", target: "_blank"}
-        %span.text-muted /u/#{item.author.try(:strip)}
+      %span.text-right.pull-right
+        %a.text-right{:href => "http://reddit.com/u/#{item.author}", target: "_blank"}
+          %span.text-muted /u/#{item.author.try(:strip)}
+          %br
+          %small #{time_ago_in_words(Time.at(item.attributes[:created_utc]).to_datetime)} ago
         %br
-        %small #{time_ago_in_words(Time.at(item.attributes[:created_utc]).to_datetime)} ago
+        %small.text-right= link_to item.subreddit, subreddit_url(subreddit: item.subreddit)
