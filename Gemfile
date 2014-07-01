@@ -32,6 +32,7 @@ gem 'addressable'
 
 gem 'vacuum'
 gem 'redditkit', github: "ready4god2513/RedditKit.rb", branch: "dev"
+# gem 'redditkit', path: '/Users/brandon/Documents/workspace/ruby/RedditKit.rb'
 gem 'redcarpet'
 gem 'htmlentities'
 

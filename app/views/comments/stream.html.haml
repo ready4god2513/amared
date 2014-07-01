@@ -1,0 +1,7 @@
+= render "r/header", sub: @sub if @sub.present?
+- title("Recent Comment Stream")
+
+%h4#comments Recent Comments
+.row
+  - @comments.each do |comment|
+    = render "single", comment: comment, layer: 0, skip_replies: true

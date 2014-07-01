@@ -5,14 +5,18 @@
       %h5
         %span.text-danger
           %span.glyphicon.glyphicon-heart
-          = comment.score
+          = link_to comment.score, comments_url(subreddit: comment.subreddit, id: comment.id, anchor: :comments)
         \&nbsp;
-        %a.text-right.pull-right{:href => "http://reddit.com/u/#{comment.author}", target: "_blank"}
-          %span.text-muted /u/#{comment.author.try(:strip)}
+        %span.pull-right.text-right
+          %a.text-right{:href => "http://reddit.com/u/#{comment.author}", target: "_blank"}
+            %span.text-muted /u/#{comment.author.try(:strip)}
+            %br
+            %small #{time_ago_in_words(Time.at(comment.attributes[:created_utc]).to_datetime)} ago
           %br
-          %small #{time_ago_in_words(Time.at(comment.attributes[:created_utc]).to_datetime)} ago
+          %small.text-right= link_to comment.subreddit, subreddit_url(subreddit: comment.subreddit)
 
-    - comment.replies.each do |reply|
-      - next if reply.kind == "more"
-      .row
-        = render "single", comment: reply, layer: layer + 1
+    - unless local_assigns[:skip_replies].present?
+      - comment.replies.each do |reply|
+        - next if reply.kind == "more"
+        .row
+          = render "single", comment: reply, layer: layer + 1

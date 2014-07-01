@@ -7,4 +7,10 @@ class CommentsController < ApplicationController
     @comments = RedditKit.comments @item.link, sort: params[:sort] || "confidence"
   end
 
+  def stream
+    RedditKit.sign_in 'morethanaprogrammer', 'losgatos'
+    @sub = Subreddit.new(params[:subreddit] || "pics") unless params[:subreddit] == "all"
+    @comments = RedditKit.recent_comments(subreddit: params[:subreddit])
+  end
+
 end
