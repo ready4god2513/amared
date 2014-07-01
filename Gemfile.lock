@@ -1,5 +1,7 @@
-PATH
-  remote: /Users/brandon/Documents/workspace/ruby/RedditKit.rb
+GIT
+  remote: git://github.com/ready4god2513/RedditKit.rb.git
+  revision: 98c2759eea261ba2b7a18c7e7e9fc4f28f1725b1
+  branch: dev
   specs:
     redditkit (1.1.6)
       faraday (~> 0.8)
