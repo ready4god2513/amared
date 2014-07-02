@@ -8,6 +8,8 @@
     %p.label.label-default= link_to "View Album", item.url, target: "_blank"
   - elsif item.picture?
     = link_to image_tag(item.url), item.url, target: "_blank"
+  - elsif item.gfycat?
+    = item.gfycat_embed.html_safe
   %p
     %small= link_to domain_name(item.url), search_url(site: domain_name(item.url))
   - if !tlength
