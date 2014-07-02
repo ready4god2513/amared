@@ -10,7 +10,7 @@ class CommentsController < ApplicationController
   def stream
     RedditKit.sign_in ENV["REDDIT_USERNAME"], ENV["REDDIT_PASSWORD"]
     @sub = Subreddit.new(params[:subreddit] || "pics") unless params[:subreddit] == "all"
-    @comments = RedditKit.recent_comments(params)
+    @comments = RedditKit.recent_comments(params[:subreddit], params.dup)
   end
 
 end

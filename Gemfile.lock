@@ -1,9 +1,9 @@
 GIT
   remote: git://github.com/ready4god2513/RedditKit.rb.git
-  revision: 98c2759eea261ba2b7a18c7e7e9fc4f28f1725b1
+  revision: ddde464cea5e41c04b44e2066fb28be87aed6969
   branch: dev
   specs:
-    redditkit (1.1.6)
+    redditkit (1.2.1)
       faraday (~> 0.8)
       htmlentities (~> 4.3)
       multi_json (~> 1.8)
