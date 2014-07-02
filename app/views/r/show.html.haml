@@ -10,9 +10,9 @@
       = render "item", item: item, tlength: 200
 
 - if @sub.present?
-  .row= link_to "Next Page", next_page_link(@sub.options), class: "btn btn-info col-xs-12"
+  = link_to "Next Page", next_page_link(@sub.options), class: "btn btn-info col-xs-12"
 - else
-  .row= link_to "Next Page", next_page_link(params.merge({ after: @links.after })), class: "btn btn-info col-xs-12"
+  = link_to "Next Page", next_page_link(params.merge({ after: @links.after })), class: "btn btn-info col-xs-12"
 
 - if @sub.present?
   .page-header

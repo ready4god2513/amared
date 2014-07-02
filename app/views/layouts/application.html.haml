@@ -12,6 +12,9 @@
         .text-center.well
           .row
             .col-sm-12
+              %span.label.label-default= link_to "New", subreddit_path(subreddit: "all", category: "new")
+              %span.label.label-default= link_to "Comment Stream", subreddit_path(subreddit: "all", category: "comments")
+              |
               - subs.each do |sub|
                 %span.label.label-default= link_to sub.name.titleize, subreddit_path(subreddit: sub.name)
 
@@ -37,5 +40,4 @@
                 = hidden_field_tag :sort, :top
                 = hidden_field_tag :time, :all
                 = submit_tag "Search Domain", class: "btn btn-info"
-    .container
       = yield
