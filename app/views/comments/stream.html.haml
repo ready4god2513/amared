@@ -1,7 +1,27 @@
 = render "r/header", sub: @sub if @sub.present?
 - title("Recent Comment Stream")
 
+
 %h4#comments Recent Comments
-.row
-  - @comments.each do |comment|
-    = render "single", comment: comment, layer: 0, skip_replies: true
+%div{"data-ng-controller" => "CommentController", "data-ng-init" => "getRecentComments()"}
+  %input.col-xs-12.input-lg{"data-ng-model" => "Search", "placeholder" => "filter comments"}
+  %hr
+  %br
+  %br
+  .row
+    .col-xs-12{"data-ng-repeat" => "comment in comments | filter:Search"}
+      .comments-layer.layer-0.well
+        %p {{ comment.attributes.body }}
+        %h5
+          %span.text-danger
+            %span.glyphicon.glyphicon-heart
+            %a{:href => "http://amared.dev/r/{{ comment.attributes.subreddit }}/item/{{ comment.attributes.link_id }}/comments#comments", :title => "{{ comment.attributes.link_title }}"} {{ comment.attributes.score }}
+          \&nbsp;
+          %span.pull-right.text-right
+            %a.text-right{:href => "http://reddit.com/u/{{ comment.attributes.author }}", :target => "_blank"}
+              %span.text-muted /u/{{ comment.attributes.author }}
+              %br
+                %small {{ comment.attributes.created_utc }}
+            %br
+              %small.text-right
+                %a{:href => "http://amared.dev/r/{{ comment.attributes.subreddit }}"} {{ comment.attributes.subreddit }}

@@ -11,6 +11,11 @@ class CommentsController < ApplicationController
     RedditKit.sign_in ENV["REDDIT_USERNAME"], ENV["REDDIT_PASSWORD"]
     @sub = Subreddit.new(params[:subreddit] || "pics") unless params[:subreddit] == "all"
     @comments = RedditKit.recent_comments(params[:subreddit], params.dup)
+
+    respond_to do |format|
+      format.html { }
+      format.json { render json: @comments.to_json }
+    end
   end
 
 end
