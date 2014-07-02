@@ -1,0 +1,1 @@
+RedditKit::App.name = ENV["APP_NAME"]
