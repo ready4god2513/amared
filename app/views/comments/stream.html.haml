@@ -9,7 +9,7 @@
   %br
   %br
   .row{"data-ng-init" => "getRecentComments()"}
-    .col-xs-12{"data-ng-repeat" => "comment in comments | filter:Search"}
+    .col-xs-12{"data-ng-repeat" => "comment in comments | filter:Search | unique:'attributes.id'"}
       .comments-layer.layer-0.well
         %h4 
           %a{:href => "http://amared.dev/r/{{ comment.attributes.subreddit }}/item/{{ comment.attributes.link_id }}/comments#comments", :title => "{{ comment.attributes.link_title }}"} {{ comment.attributes.link_title }}
