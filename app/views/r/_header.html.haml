@@ -4,6 +4,7 @@
     %small
       - %w{top/day hot new controversial/day rising}.each do |category|
         %span.label.label-default= link_to category.split("/").first, params.merge({category: category, after: nil, time: nil}), class: "#{'active' if params[:category] == category}"
+      %span.label.label-default= link_to "comment stream", comment_stream_path(subreddit: sub.name)
     - if params[:category].present? && ["top", "controversial"].include?(params[:category])
       %small
         |

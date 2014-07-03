@@ -9,5 +9,7 @@
           %h4= link_to item.name.titleize, subreddit_path(subreddit: item.name)
         - else
           %h4= link_to item.title.titleize, subreddit_path(subreddit: item.display_name)
+          = link_to image_tag(item.header_img), subreddit_path(subreddit: item.display_name) if item.header_img.present?
           %p #{item.subscribers} Subscribers
-          .hidden= markdownify(item.description).html_safe
+          - if item.description.present?
+            .hidden= markdownify(item.description).html_safe
