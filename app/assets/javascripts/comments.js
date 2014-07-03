@@ -23,15 +23,11 @@ app.controller('CommentController', ['$scope', '$timeout', 'Amared', function($s
   $scope.subreddit = 'all';
 
   $scope.getRecentComments = function(){
-    console.log($scope.subreddit);
     Amared.recent($scope.subreddit, function(res){
-      res.forEach(function(item){
-        $scope.comments.unshift(item); // Let's add one at a time to the top.
-      });
-
+      $scope.comments = res;
       $timeout(function(){
         $scope.getRecentComments();
-      }, 3000);
+      }, 1000);
 
     });
   };
