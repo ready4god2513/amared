@@ -2,8 +2,8 @@ var app = angular.module('amared', ['ngResource']);
 
 app.factory('Amared', ['$http', function($http){
   return {
-    recent: function(callback){
-      $http.get('/r/all/comments.json?limit=1000').success(function(response){
+    recent: function(subreddit, callback){
+      $http.get('/r/' + subreddit + '/comments.json?limit=1000').success(function(response){
         callback(response);
       });
     }
@@ -19,10 +19,12 @@ app.filter('unsafe', function($sce) {
 
 app.controller('CommentController', ['$scope', '$timeout', 'Amared', function($scope, $timeout, Amared){
 
-  $scope.comments = []
+  $scope.comments = [];
+  $scope.subreddit = 'all';
 
   $scope.getRecentComments = function(){
-    Amared.recent(function(res){
+    console.log($scope.subreddit);
+    Amared.recent($scope.subreddit, function(res){
       res.forEach(function(item){
         $scope.comments.unshift(item); // Let's add one at a time to the top.
       });

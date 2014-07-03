@@ -1,6 +1,6 @@
 .comments-layer
 {
-  border-left: 4px solid #000;
+  border-left: 2px solid #000;
 
   .layers(@counter, @color) when (@counter > 0){
     .layers((@counter - 1), difference(@color, lighten(@color, 50%)));
