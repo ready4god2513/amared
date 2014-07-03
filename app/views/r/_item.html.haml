@@ -11,7 +11,7 @@
   - elsif item.gfycat?
     = item.gfycat_embed.html_safe
   %p
-    %small= link_to domain_name(item.url), search_url(site: domain_name(item.url))
+    %small= link_to domain_name(item.url), search_domain_url(d: domain_name(item.url))
   - if !tlength
     = markdownify(item.selftext).html_safe
   - else
