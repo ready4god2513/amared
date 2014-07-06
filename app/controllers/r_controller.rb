@@ -17,6 +17,19 @@ class RController < ApplicationController
       @sub = Subreddit.new(params[:subreddit] || "pics")
       @output = @sub.links(params.dup)
     end
+
+    filter_images if params[:images].present?
+
+    respond_to do |format|
+      format.html { render params[:stream].present? ? "stream" : "show" }
+      format.json { render json: @output.to_json }
+    end
+  end
+
+  private
+
+  def filter_images
+    @output.select!(&:picture?)
   end
   
 end

@@ -1,22 +1,3 @@
-var app = angular.module('amared', ['ngResource', 'ui.utils', 'ngAnimate']);
-
-app.factory('Amared', ['$http', function($http){
-  return {
-    recent: function(subreddit, callback){
-      $http.get('/r/' + subreddit + '/comments.json?limit=20').success(function(response){
-        callback(response);
-      });
-    }
-  };
-}]);
-
-app.filter('unsafe', function($sce) {
-  return function(val) {
-    return $sce.trustAsHtml(val);
-  };
-});
-
-
 app.controller('CommentController', ['$scope', '$timeout', 'Amared', function($scope, $timeout, Amared){
 
   $scope.comments = [];
@@ -26,7 +7,7 @@ app.controller('CommentController', ['$scope', '$timeout', 'Amared', function($s
   $scope.maxLength = 100;
 
   $scope.getRecentComments = function(){
-    Amared.recent($scope.subreddit, function(res){
+    Amared.recentComments($scope.subreddit, function(res){
       $scope.allComments = $scope.allComments.concat(res);
       $timeout(function(){
         $scope.getRecentComments();

@@ -1,0 +1,19 @@
+- if @sub.present?
+  = render "header", sub: @sub
+  - title(@sub.name)
+- else
+  - title("All Recent Links")
+
+.container
+  #posts{"data-ng-controller" => "SubController"}
+    %h4#comments Recent Comments
+    %input.col-xs-12.input-lg{"data-ng-model" => "Search", "placeholder" => "filter comments"}
+    %input{type: "hidden", "data-ng-model" => "subreddit", "data-ng-init" => "subreddit='#{params[:subreddit]}'"}
+    %hr
+    %br
+    %br
+    .row{"data-ng-init" => "getRecentPosts()"}
+      .col-xs-12.repeated-item{"data-ng-repeat" => "post in posts | filter:Search | unique:'link.attributes.id'"}
+        %article.well
+          %a{href: "/r/{{ post.link.attributes.subreddit }}/item/{{ post.link.attributes.id }}/comments#comments"}
+            %img{"data-ng-src" => "{{ post.link.attributes.url }}"}
