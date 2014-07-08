@@ -9,7 +9,7 @@ app.controller('SubController', ['$scope', '$timeout', '$filter', 'Amared', func
 
   $scope.getRecentPosts = function(){
     Amared.recentPosts($scope.subreddit, function(res){
-      $scope.allPosts = res.reverse().concat($scope.allPosts);
+      $scope.allPosts = $scope.allPosts.concat(res);
       $timeout(function(){
         $scope.getRecentPosts();
       }, 2000);
