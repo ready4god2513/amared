@@ -4,7 +4,8 @@ app.controller('SubController', ['$scope', '$timeout', '$filter', 'Amared', func
   $scope.allPosts = [];
   $scope.subreddit = 'all';
   $scope.Search = '';
-  $scope.maxLength = 500;
+  $scope.maxLength = 1;
+  $scope.timeout = 4;
 
   $scope.getRecentPosts = function(){
     Amared.recentPosts($scope.subreddit, function(res){
@@ -24,13 +25,13 @@ app.controller('SubController', ['$scope', '$timeout', '$filter', 'Amared', func
       $scope.posts.push(new_post);
 
       if($scope.posts.length > $scope.maxLength){
-        $scope.posts.unshift();
+        $scope.posts.shift();
       }
     }
 
     $timeout(function(){
       $scope.addNewPost();
-    }, 200);
+    }, $scope.timeout * 1000);
   }
 
   $scope.addNewPost();
