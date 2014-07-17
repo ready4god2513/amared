@@ -9,9 +9,13 @@
         \&nbsp;
         %span.pull-right.text-right
           %a.text-right{:href => "http://reddit.com/u/#{comment.author}", target: "_blank"}
-            %span.text-muted /u/#{comment.author.try(:strip)}
+            %span.text-muted 
+              \/u/#{comment.author.try(:strip)} 
+              %small= "(#{comment.author_flair_text})" if comment.author_flair_text.present? 
             %br
-            %small #{time_ago_in_words(Time.at(comment.attributes[:created_utc]).to_datetime)} ago
+            %small 
+              #{time_ago_in_words(Time.at(comment.attributes[:created_utc]).to_datetime)} ago
+              = "*" if comment.edited
           %br
           %small.text-right= link_to comment.subreddit, subreddit_url(subreddit: comment.subreddit)
 
