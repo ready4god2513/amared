@@ -13,7 +13,6 @@ app.controller('SubController', ['$scope', '$timeout', '$filter', 'Amared', func
       $timeout(function(){
         $scope.getRecentPosts();
       }, 2000);
-
     });
   };
 

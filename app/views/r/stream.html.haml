@@ -1,5 +1,6 @@
 - if @sub.present?
-  .text-center= title(@sub.name)
+  = render "header", sub: @sub
+  - title(@sub.name)
 - else
   - title("All Recent Links")
 
@@ -7,8 +8,12 @@
   #posts{"data-ng-controller" => "SubController"}
     %h5 Speed ({{ timeout }} Seconds)
     %input{type: "range", min: 1, max: 50, value: "{{ timeout }}", "data-ng-model" => "timeout"}
+    %input{type: "hidden", "data-ng-model" => "subreddit", "data-ng-init" => "subreddit='#{params[:subreddit]}'"}
+    %hr
+    %br
+    %br
     .row{"data-ng-init" => "getRecentPosts()"}
-      .col-xs-12.repeated-item{"data-ng-repeat" => "post in posts"}
+      .col-xs-12.repeated-item{"data-ng-repeat" => "post in posts | filter:Search | unique:'link.attributes.id'"}
         %article.well
           %a{href: "/r/{{ post.link.attributes.subreddit }}/item/{{ post.link.attributes.id }}/comments#comments"}
             %img{"data-ng-src" => "{{ post.link.attributes.url }}"}
