@@ -1,23 +1,26 @@
 - unless comment.blank?
   %div{class: "col-xs-12"} 
     .well{class: "comments-layer layer-#{layer}"}
-      = markdownify(comment.body).html_safe
-      %h5
-        %span.text-danger
-          %span.glyphicon.glyphicon-heart
-          = link_to comment.score, comments_url(subreddit: comment.subreddit, id: comment.link_id.gsub(/t3_/, ''), anchor: :comments), title: comment.attributes[:link_title]
-        \&nbsp;
-        %span.pull-right.text-right
-          %a.text-right{:href => "http://reddit.com/u/#{comment.author}", target: "_blank"}
-            %span.text-muted 
-              \/u/#{comment.author.try(:strip)} 
-              %small= "(#{comment.author_flair_text})" if comment.author_flair_text.present? 
+      .row
+        .col-sm-9
+          .comment-content= markdownify(comment.body).html_safe
+          %h5
+            %span.text-danger
+              %span.glyphicon.glyphicon-heart
+              = link_to comment.score, comments_url(subreddit: comment.subreddit, id: comment.link_id.gsub(/t3_/, ''), anchor: :comments), title: comment.attributes[:link_title]
+            \&nbsp;
+        .col-sm-3
+          %span.pull-right.text-right
+            %a.text-right{:href => "http://reddit.com/u/#{comment.author}", target: "_blank"}
+              %span.text-muted 
+                \/u/#{comment.author.try(:strip)} 
+                %small= "(#{comment.author_flair_text})" if comment.author_flair_text.present? 
+              %br
+              %small 
+                #{time_ago_in_words(Time.at(comment.attributes[:created_utc]).to_datetime)} ago
+                = "*" if comment.edited
             %br
-            %small 
-              #{time_ago_in_words(Time.at(comment.attributes[:created_utc]).to_datetime)} ago
-              = "*" if comment.edited
-          %br
-          %small.text-right= link_to comment.subreddit, subreddit_url(subreddit: comment.subreddit)
+            %small.text-right= link_to comment.subreddit, subreddit_url(subreddit: comment.subreddit)
 
     - unless local_assigns[:skip_replies].present?
       - comment.replies.each do |reply|
